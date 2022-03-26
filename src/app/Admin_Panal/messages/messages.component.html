@@ -1,0 +1,81 @@
+<div class="main-wrapper">
+  <app-aside>
+    <ng-container class="content">
+      <ul>
+        <li>
+          <a routerLink="/admin-panal/statics"
+            ><i class="fas fa-tachometer-alt"></i> <span>Statics</span></a
+          >
+        </li>
+        <li class="list-divider"></li>
+
+        <li class="submenu">
+          <a routerLink="/admin-panal/apartments"
+            ><i class="fas fa-home"></i> <span> Apartments </span>
+            <span class="menu-arrow"></span
+          ></a>
+        </li>
+        <li class="list-divider"></li>
+
+        <li class="submenu">
+          <a routerLink="/admin-panal/users"
+            ><i class="fas fa-user"></i> <span> Users </span>
+            <span class="menu-arrow"></span
+          ></a>
+        </li>
+        <li class="list-divider"></li>
+        <li class="submenu active">
+          <a routerLink="massages"
+            ><i class="fas fa-comment-alt"></i> <span> Messages </span>
+            <span class="menu-arrow"></span
+          ></a>
+        </li>
+        <li class="list-divider"></li>
+        <li class="submenu">
+          <a routerLink="/admin-panal/add/City"
+            ><i class="fas fa-plus-circle"></i> <span> Add City </span>
+            <span class="menu-arrow"></span
+          ></a>
+        </li>
+      </ul>
+    </ng-container>
+  </app-aside>
+  <div class="page-wrapper mt-5">
+    <div class="content container-fluid">
+      <div class="row">
+        <div class="col-md-12 d-flex">
+          <div class="card card-table flex-fill">
+            <div class="card-body mt-5 p-2">
+              <div class="table-responsive">
+                <table datatable id="datatablecontactus" class="table table-hover table-center">
+                  <thead>
+                    <tr>
+                      <th class="text-center text-danger">ID</th>
+                      <th class="text-center text-danger">firstname</th>
+                      <th class="text-center text-danger">lastname</th>
+                      <th class="text-center text-danger">Email</th>
+                      <th class="text-center text-danger">subject</th>
+                      <th class="text-center text-danger">message</th>
+                      <th class="text-center text-danger">Created At</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let message of messages">
+                      <td class="text-nowrap text-center"><div>{{ message.id }}</div></td>
+                      <td class="text-nowrap text-center">{{message.firstname}}</td>
+                      <td class="text-nowrap text-center">{{message.lastname}}</td>
+                      <td class="text-nowrap text-center">{{message.email}}</td>
+                      <td class="text-nowrap text-center">{{message.subject}}</td>
+                      <td class="text-wrap text-center"> {{message.message}}</td>
+                      <td class="text-wrap text-center"> {{message.created_at | date: "medium"}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

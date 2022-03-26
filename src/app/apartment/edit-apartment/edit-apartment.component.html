@@ -1,0 +1,302 @@
+<app-overlay>
+  <ng-container class="content">
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center">
+        <h1 class="mb-5">Edit Apartment</h1>
+       
+      </div>
+    </div>
+  </ng-container>
+</app-overlay>
+<div class="container">
+
+  <div class="row d-flex justify-content-center">
+<div class=" col-md-8 mb-5"  data-aos="fade">
+
+
+  <form #addApartmentForm="ngForm"
+  (ngSubmit)="addApartment(addApartmentForm)" class="p-5 bg-white" style="margin-top: -150px;">
+   
+  <h3 class="text-danger text-center">Please Update This Form  </h3>
+
+    <div class="row form-group">
+       <!-- address -->
+       <div class="col-md-12">
+        <div class="form-group">
+          <label>Address</label>
+          <input
+            required
+            type="text"
+            class="form-control"
+            id="address"
+            name="address"
+            ngModel
+            #address="ngModel"
+            [ngClass]="{
+              'alert-danger':
+                address.invalid &&
+                (address.touched || addApartmentForm.submitted)
+            }"
+          />
+        </div>
+        <div>
+          <div
+            class="text-danger small"
+            *ngIf="
+              address.invalid &&
+              (address.touched || addApartmentForm.submitted)
+            "
+          >
+            - Address is required.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      
+      <!-- nearby -->
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Nearby</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nearby"
+            name="nearby"
+            ngModel
+            #nearby="ngModel"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      
+      <!-- accompany -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Number of Accompanies</label>
+          <input
+            required
+            class="form-control"
+            type="number"
+            min="1"
+            value=""
+            pattern="^-?\d*\.?\d+$"
+            name="accompany"
+            ngModel
+            #accompany="ngModel"
+            [ngClass]="{
+              'alert-danger':
+                accompany.invalid &&
+                (accompany.touched || addApartmentForm.submitted)
+            }"
+          />
+        </div>
+        <div>
+          <div
+            class="text-danger small"
+            *ngIf="
+              accompany.invalid &&
+              (accompany.touched || addApartmentForm.submitted)
+            "
+          >
+            - Accompany is required.
+          </div>
+          <div
+            class="text-danger small"
+            *ngIf="accompany.errors?.min && accompany.touched"
+          >
+            - Accompany must be greater than 0.
+          </div>
+          <div
+            class="text-danger small"
+            *ngIf="accompany.errors?.pattern && accompany.touched"
+          >
+            - Accompany must be number.
+          </div>
+        </div>
+      </div>
+      <!-- price -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Price</label>
+          <label class="text-muted" for="">&nbsp;(LE)</label>
+          <input
+            required
+            class="form-control"
+            type="number"
+            min="0"
+            value=""
+            pattern="^-?\d*\.?\d+$"
+            name="price"
+            ngModel
+            #price="ngModel"
+            [ngClass]="{
+              'alert-danger':
+                price.invalid &&
+                (price.touched || addApartmentForm.submitted)
+            }"
+          />
+        </div>
+        <div>
+          <div
+            class="text-danger small"
+            *ngIf="
+              price.invalid &&
+              (price.touched || addApartmentForm.submitted)
+            "
+          >
+            - Price is required.
+          </div>
+          <div
+            class="text-danger small"
+            *ngIf="price.errors?.min && price.touched"
+          >
+            - Price must positive number.
+          </div>
+          <div
+            class="text-danger small"
+            *ngIf="price.errors?.pattern && price.touched"
+          >
+            - Price must be number.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <!-- gender -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Gender</label>
+          <div
+            [ngClass]="{
+              'alert-danger':
+                gender.invalid && addApartmentForm.submitted
+            }"
+            class="radio d-flex justify-content-around"
+          >
+            <label>
+              <input
+                required
+                type="radio"
+                name="gender"
+                value="male"
+                ngModel
+                #gender="ngModel"
+              />
+              Male
+            </label>
+            <label>
+              <input
+                required
+                type="radio"
+                name="gender"
+                value="femail"
+                ngModel
+                #gender="ngModel"
+              />
+              Female
+            </label>
+          </div>
+        </div>
+        <div>
+          <div
+            class="text-danger small"
+            *ngIf="gender.invalid && addApartmentForm.submitted"
+          >
+            - Gender is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <!-- description -->
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Description</label>
+          <textarea
+            required
+            class="form-control"
+            rows="10"
+            id="comment"
+            name="description"
+            #description="ngModel"
+            ngModel
+            [ngClass]="{
+              'alert-danger':
+                description.invalid &&
+                (description.touched || addApartmentForm.submitted)
+            }"
+          ></textarea>
+        </div>
+        <div>
+          <div
+            class="text-danger small"
+            *ngIf="
+              description.invalid &&
+              (description.touched || addApartmentForm.submitted)
+            "
+          >
+            - Description is required.
+          </div>
+        </div>
+      </div>     
+    </div>
+ 
+<div class="row from-group">
+<div class="col-md-12">
+
+  <label >Apartment Images :</label>
+  <input type="file" id="file" name="pic"  required
+  class="form-control" name="images"
+  ngModel  accept="image/*" multiple [ngClass]="{
+    'alert-danger':
+      images.invalid &&
+      (images.touched || addApartmentForm.submitted)
+  }" (change)="selectFiles($event)" #images="ngModel"/>
+  <label for="file" class="custom-label">Upload Images</label>
+</div>
+<div>
+<div
+  class="text-danger small"
+  *ngIf="
+    images.invalid &&
+    (images.touched || addApartmentForm.submitted)
+  "
+>
+  - Image is required.
+</div>
+</div>
+
+</div>
+<div class="row form-group mt-5">
+<div class="offset-md-1 col-md-5">
+  <button
+        type="submit"
+        class="btn custom-btn-bg text-white ml-2 btn-lg"
+        [disabled]="!addApartmentForm.valid"
+      >
+      Update
+      </button>
+</div>
+<div class="offset-md-1 col-md-5">
+  <button type="button" class="btn custom-btn-bg btn-lg text-white">
+    Cancel
+  </button>
+</div>
+</div>
+
+
+
+
+    
+
+
+  </form>
+</div>
+</div>
+</div>
+

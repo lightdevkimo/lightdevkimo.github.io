@@ -1,0 +1,107 @@
+<div class="main-wrapper">
+  <app-aside>
+    <ng-container class="content">
+      <ul>
+        <li>
+          <a routerLink="/admin-panal/statics"
+            ><i class="fas fa-tachometer-alt"></i> <span>Statics</span></a
+          >
+        </li>
+        <li class="list-divider"></li>
+
+        <li class="active">
+          <a routerLink="/admin-panal/apartments"
+            ><i class="fas fa-home"></i> <span> Apartments </span>
+            <span class="menu-arrow"></span
+          ></a>
+        </li>
+        <li class="list-divider"></li>
+
+        <li class="submenu">
+          <a routerLink="/admin-panal/users"
+            ><i class="fas fa-user"></i> <span> Users </span>
+            <span class="menu-arrow"></span
+          ></a>
+        </li>
+        <li class="list-divider"></li>
+        <li class="submenu">
+          <a routerLink="/admin-panal/massages"
+            ><i class="fas fa-comment-alt"></i> <span> Messages </span>
+            <span class="menu-arrow"></span
+          ></a>
+        </li>
+        <li class="list-divider"></li>
+        <li class="submenu">
+          <a routerLink="/admin-panal/add/City"
+            ><i class="fas fa-plus-circle"></i> <span> Add City </span>
+            <span class="menu-arrow"></span
+          ></a>
+        </li>
+        <li class="list-divider"></li>
+      </ul>
+    </ng-container>
+  </app-aside>
+  <div class="page-wrapper mt-5">
+    <div class="content container-fluid">
+      <div class="row">
+        <div class="col-md-12 d-flex">
+          <div class="card card-table flex-fill">
+            <div class="card-body p-2 mt-5">
+              <div class="table-responsive">
+                <table
+                  datatable
+                  class="table table-hover table-center"
+                  id="datatableapartements"
+                >
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Description</th>
+                      <th>Address</th>
+                      <th>Nearby</th>
+                      <th>Gender</th>
+                      <th>Available</th>
+                      <th>Max</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th class="text-center">Show</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let apartement of AllApartements">
+                      <td class="text-nowrap">
+                        <div>{{ apartement.id }}</div>
+                      </td>
+                      <td class="text-nowrap">{{ apartement.description |slice :0 :10}}...</td>
+                      <td class="text-nowrap">{{ apartement.address |slice :0 :10 }}...</td>
+                      <td class="text-nowrap">{{ apartement.nearby }}</td>
+                      <td class="text-nowrap">{{ apartement.gender }}</td>
+                      <td class="text-nowrap">{{ apartement.available }}</td>
+                      <td class="text-nowrap">{{ apartement.max }}</td>
+                      <td class="text-nowrap">
+                        {{ apartement.created_at | date: "medium" }}
+                      </td>
+                      <td class="text-nowrap">{{ apartement.approved?'approved':'Requested' }}</td>
+                      <td class="text-center">
+                        <span>
+                          <a
+                            [routerLink]="[
+                              '/find',
+                              'apart-details',
+                              apartement.id
+                            ]"
+                            >Show</a
+                          >
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

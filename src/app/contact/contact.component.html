@@ -1,0 +1,64 @@
+<app-overlay>
+    <ng-container class="content">
+        <h1>Contact us</h1>
+    </ng-container>
+    </app-overlay>
+
+    <div class="site-section bg-light">
+        <div class="container">
+          <div class="row">
+            <div class="offset-md-2 col-md-8 mb-5"  data-aos="fade">
+              <form action="#" class="p-5 bg-white" style="margin-top: -15vh;" #message="ngForm" (ngSubmit)="Sent(message.value)">
+                <div class="alert alert-danger" *ngIf="error">
+                  {{ error }}
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-md-6 mb-3 mb-md-0">
+                    <label class="text-black" for="firstname">First Name</label>
+                    <input ngModel type="text" id="firstname" name="firstname" class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="text-black" for="lastname">Last Name</label>
+                    <input ngModel type="text" id="lastname" name="lastname" class="form-control">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+
+                  <div class="col-md-12">
+                    <label class="text-black" for="email">Email</label>
+                    <input ngModel type="email" name="email" id="email" class="form-control">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+
+                  <div class="col-md-12">
+                    <label class="text-black" for="subject">Subject</label>
+                    <input ngModel type="subject" name="subject" id="subject" class="form-control">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-md-12">
+                    <label class="text-black" for="message">Message</label>
+                    <textarea ngModel name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Write your notes or questions here..."></textarea>
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="offset-md-4 col-md-8">
+                    <button class="btn btn-danger btn-md text-white" type="submit"> Send Post </button>
+                  </div>
+                </div>
+
+
+
+
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>

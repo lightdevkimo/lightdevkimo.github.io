@@ -1,0 +1,182 @@
+<app-aside>
+  <ng-container class="content">
+    <ul>
+      <li>
+        <a routerLink="/admin-panal/statics"><i class="fas fa-tachometer-alt"></i> <span>Statics</span></a>
+      </li>
+      <li class="list-divider"></li>
+
+      <li class="submenu">
+        <a routerLink="/admin-panal/apartments"><i class="fas fa-home"></i> <span> Apartments </span>
+          <span class="menu-arrow"></span></a>
+      </li>
+      <li class="list-divider"></li>
+
+      <li class="submenu">
+        <a routerLink="/admin-panal/users"><i class="fas fa-user"></i> <span> Users </span>
+          <span class="menu-arrow"></span></a>
+      </li>
+      <li class="list-divider"></li>
+      <li class="submenu">
+        <a routerLink="/admin-panal/massages"><i class="fas fa-comment-alt"></i> <span> Messages </span>
+          <span class="menu-arrow"></span></a>
+      </li>
+      <li class="list-divider"></li>
+      <li class="active">
+        <a routerLink="/admin-panal/add/City"><i class="fas fa-plus-circle"></i> <span> Add City </span>
+          <span class="menu-arrow"></span></a>
+      </li>
+
+    </ul>
+  </ng-container>
+</app-aside>
+<div class="site-section bg-light">
+  <div class="container">
+    <div class="row d-flex justify-content-around">
+      <div class="col-md-6 ">
+
+        <div class="modal fade" id="add_city" aria-hidden="true" role="dialog">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title text-danger">Add City</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form class="p-5 bg-white" #addCity="ngForm" (ngSubmit)="AddCity(addCity.value)">
+                  <div class="row form-group">
+                    <div class="col-md-12">
+                      <label class="text-black" for="city">City</label>
+                      <input type="text" id="city" class="form-control" ngModel name="name" required #city="ngModel"
+                        [ngClass]="{ 'alert-danger': city.invalid && city.touched }" />
+                      <div>
+                        <div class="text-danger small" *ngIf="city.errors?.required && city.touched">
+                          - Your city is required.
+                        </div>
+                        <div class="text-danger small" *ngIf="city.errors?.city && city.touched">
+                          - Your city must be valid.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <div class="col-md-12">
+                      <label class="text-black" for="governorate">Governorate</label>
+                      <input type="text" id="governorate" class="form-control" ngModel name="governorate" list="list_gov" required
+                        #governorate="ngModel" [ngClass]="{
+                                'alert-danger': governorate.invalid && governorate.touched
+                              }" />
+                              <datalist id="list_gov">
+                                <option value="Alexandria">Alexandria</option>
+                                <option value="Aswan">Aswan</option>
+                                <option value="Asyut">Asyut</option>
+                                <option value="Beheira">Beheira</option>
+                                <option value="Beni Suef">Beni Suef</option>
+                              </datalist>
+                      <div>
+                        <div class="text-danger small" *ngIf="governorate.errors?.required && governorate.touched">
+                          - Your Governorate is required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row d-flex form-group align-items-center justify-content-center">
+                    <div class="col-md-4">
+                      <input type="submit" value="Add" data-toggle="modal" href="#add_city" class="btn btn-danger btn-lg text-white" />
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal fade" id="edit_city" aria-hidden="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit City</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="row form-row">
+              <div class="col-12 col-sm-6">
+                <div class="form-group">
+                  <label>City</label>
+                  <input type="text" class="form-control" value="cairo" />
+                </div>
+              </div>
+              <div class="col-12 col-sm-6">
+                <div class="form-group">
+                  <label>Governorate</label>
+                  <input type="text" class="form-control" value="shobra" />
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-danger btn-block ">
+              Save Changes
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="page-wrapper ">
+    <div class="content container-fluid">
+      <div class="page-header">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="mt-5">
+              <h4 class="card-title float-left mt-2">Cities</h4>
+              <a data-toggle="modal" href="#add_city" class="btn btn-primary float-right veiwbutton">Add City</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 d-flex">
+          <div class="card card-table flex-fill">
+            <div class="card-body  p-2">
+              <div class="table-responsive">
+                <table datatable id="datatablecities" class="table table-hover table-center">
+                  <thead>
+                    <tr>
+                      <th class="text-center text-danger">City ID</th>
+                      <th class="text-center text-danger">City Name</th>
+                      <th class="text-center text-danger">Created At</th>
+                      <th class="text-center text-danger">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let city of cities">
+                      <td class="text-nowrap text-center">
+                        <div>{{ city.id }}</div>
+                      </td>
+                      <td class="text-nowrap text-center">{{ city.name }}</td>
+                      <td class="text-nowrap text-center">{{ city.created_at | date: "medium"}}</td>
+                      <td>
+                        <div class="actions text-center">
+                          <a  (click)="deleteCity(city.id)" class="btn rounded bg-dark text-white mr-2"><i class="fas fa-trash-alt"></i>Delete</a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

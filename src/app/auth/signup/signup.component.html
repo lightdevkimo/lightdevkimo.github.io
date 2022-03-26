@@ -1,0 +1,164 @@
+<app-overlay>
+  <ng-container class="content">
+    <h1>Sign Up</h1>
+  </ng-container>
+</app-overlay>
+
+<div class="site-section bg-light">
+  <div class="container" style="margin-top: -30vh">
+    <div class="row d-flex justify-content-center">
+      <div class="col-*">
+        <div *ngIf="isLoading">
+          <app-loading-spinner></app-loading-spinner>
+        </div>
+      </div>
+    </div>
+    <div class="row d-flex justify-content-around">
+      <div class="col-md-6 mb-5">
+        <form class="p-5 bg-white" #signupForm="ngForm" (ngSubmit)="signup(signupForm.value)" *ngIf="!isLoading">
+          <ul class="alert alert-danger" *ngIf="error.length>0">
+            <li *ngFor="let err of error">{{err}}</li>
+          </ul>
+          <!-- first name and last name -->
+          <div class="row form-group">
+            <div class="col-md-12 mb-3 mb-md-0">
+              <label class="text-black" for="name"> Name</label>
+              <input type="text" id="name" class="form-control" ngModel name="name" required
+                pattern="^[a-zA-Z_][a-zA-Z0-9_]*$" minlength="5" #name="ngModel"
+                [ngClass]="{ 'alert-danger': name.invalid && name.touched }" />
+              <div>
+                <div class="text-danger small" *ngIf="name.errors?.required && name.touched">
+                  - Your Name is required.
+                </div>
+                <div class="text-danger small" *ngIf="name.errors?.pattern && name.touched">
+                  - Your Name must start with letters or underscores only.
+                </div>
+                <div class="text-danger small" *ngIf="name.errors?.minlength && name.touched">
+                  - Your Name must be 5 characters at least.
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- email -->
+
+          <div class="row form-group">
+            <div class="col-md-12">
+              <label class="text-black" for="email">Email</label>
+              <input type="email" id="email" class="form-control" ngModel name="email" required email #email="ngModel"
+                [ngClass]="{ 'alert-danger': email.invalid && email.touched }" />
+              <div>
+                <div class="text-danger small" *ngIf="email.errors?.required && email.touched">
+                  - Your Email is required.
+                </div>
+                <div class="text-danger small" *ngIf="email.errors?.email && email.touched">
+                  - Your Email must be valid.
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- password -->
+
+          <div class="row form-group">
+            <div class="col-md-12">
+              <label class="text-black" for="password">Password</label>
+              <input type="password" id="password" class="form-control" ngModel name="password" required minlength="8"
+                #password="ngModel" [ngClass]="{ 'alert-danger': password.invalid && password.touched }" />
+              <div>
+                <div class="text-danger small" *ngIf="password.errors?.required && password.touched">
+                  - Your Password is required.
+                </div>
+                <div class="text-danger small" *ngIf="password.errors?.minlength && password.touched">
+                  - Your Password must be 8 at least.
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- retype password -->
+          <div class="row form-group">
+            <div class="col-md-12">
+              <label class="text-black" for="password_confirmation">Re-type Password</label>
+              <input type="password" id="password_confirmation" class="form-control"
+                [ngClass]="{ 'alert-danger': password_confirmation.invalid && password_confirmation.touched }" ngModel name="password_confirmation" required
+                #password_confirmation="ngModel" [pattern]="password.value" />
+              <div>
+                <div class="text-danger small" *ngIf="password_confirmation.errors?.required && password_confirmation.touched">
+                  - Your Password is required.
+                </div>
+                <div class="text-danger small" *ngIf="password_confirmation.errors?.pattern && password_confirmation.touched">
+                  - Two Passwords must be exact.
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row form-group">
+            <!-- gender -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="text-black">Gender</label>
+                <div [ngClass]="{
+                    'alert-danger': gender.invalid && signupForm.submitted
+                  }" class="radio d-flex justify-content-around">
+                  <label>
+                    <input required type="radio" name="gender" value="male" ngModel #gender="ngModel" />
+                    Male
+                  </label>
+                  <label>
+                    <input required type="radio" name="gender" value="female" ngModel #gender="ngModel" />
+                    Female
+                  </label>
+                </div>
+              </div>
+              <div>
+                <div class="text-danger small" *ngIf="gender.invalid && signupForm.submitted">
+                  - Gender is required.
+                </div>
+              </div>
+            </div>
+
+            <!-- role Type -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="text-black">role Type</label>
+                <div [ngClass]="{
+                    'alert-danger': role.invalid && signupForm.submitted
+                  }" class="radio d-flex justify-content-around">
+                  <label>
+                    <input required type="radio" name="role" value="2" ngModel #role="ngModel" />
+                    Owner
+                  </label>
+                  <label>
+                    <input required type="radio" name="role" value="1" ngModel #role="ngModel" />
+                    Renter
+                  </label>
+                </div>
+              </div>
+              <div>
+                <div class="text-danger small" *ngIf="role.invalid && signupForm.submitted">
+                  - role Type is required.
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- submit -->
+          <div class="row form-group align-items-center justify-content-between">
+            <div class="col-md-6">
+              <input type="submit" value="Sign Up" class="btn btn-primary btn-lg text-white"
+                [disabled]="!signupForm.valid" />
+            </div>
+
+            <div class="col-md-6">
+              Do have an role?
+              <a routerLink="/login" class="link-secondary"> Log In</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

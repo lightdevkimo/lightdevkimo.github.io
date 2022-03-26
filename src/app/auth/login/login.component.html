@@ -1,0 +1,63 @@
+<app-overlay>
+  <ng-container class="content">
+    <h1>Log In</h1>
+  </ng-container>
+</app-overlay>
+
+<div class="site-section bg-light">
+  <div class="container">
+    <div class="row d-flex justify-content-around">
+      <div class="col-md-6 mb-5">
+        <form action="#" class="p-5 bg-white" style="margin-top: -30vh" #loginForm="ngForm"
+          (ngSubmit)="login(loginForm)">
+          <ul class="alert alert-danger" *ngIf="error.length>0">
+            <li *ngFor="let err of error">{{err}}</li>
+          </ul>
+          <div class="row form-group">
+            <div class="col-md-12">
+              <label class="text-black" for="email">Email</label>
+              <input type="email" id="email2" class="form-control" ngModel name="email" required email #email="ngModel"
+                [ngClass]="{ 'alert-danger': email.invalid && email.touched }" />
+              <div>
+                <div class="text-danger small" *ngIf="email.errors?.required && email.touched">
+                  - Your Email is required.
+                </div>
+                <div class="text-danger small" *ngIf="email.errors?.email && email.touched">
+                  - Your Email must be valid.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-md-12">
+              <label class="text-black" for="pass1">Password</label>
+              <input type="password" id="pass3" class="form-control" ngModel name="password" required minlength="8"
+                #pass1="ngModel" [ngClass]="{ 'alert-danger': pass1.invalid && pass1.touched }" />
+              <div>
+                <div class="text-danger small" *ngIf="pass1.errors?.required && pass1.touched">
+                  - Your Password is required.
+                </div>
+                <div class="text-danger small" *ngIf="pass1.errors?.minlength && pass1.touched">
+                  - Your Password must be 8 at least.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row form-group align-items-center justify-content-between">
+            <div class="col-md-4">
+              <input type="submit" value="Log In" class="btn btn-primary btn-lg text-white"
+                [disabled]="!loginForm.valid" />
+            </div>
+
+            <div class="col-md-8">
+              Don’t have an account?
+              <a routerLink="/signup" class="link-secondary"> Sign Up now</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

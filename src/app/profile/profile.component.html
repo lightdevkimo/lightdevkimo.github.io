@@ -1,0 +1,353 @@
+<div class="container">
+  <div class="mt-5">
+    <div class="">
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="profile-header mt-5">
+              <div class="row align-items-center">
+                <div class="col-auto profile-image">
+                  <a href="#">
+                    <img class="rounded-circle" alt="User Image"
+                      [src]="user_info.gender == 'male'?'../../assets/assets_admin/img/male.png':'../../assets/assets_admin/img/female.jpg'"
+
+                      />
+
+
+                  </a>
+                </div>
+                <div class="col ml-md-n2 profile-user-info">
+                  <h2 class="user-name mb-3">{{ user_info.name }}</h2>
+                </div>
+              </div>
+            </div>
+            <div class="profile-menu">
+              <ul class="nav nav-tabs nav-tabs-solid">
+                <li class="nav-item">
+                  <a class="nav-link active" data-toggle="tab" href="#myprofile">My Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#password_tab">Password</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" *ngIf="user_info.role == 1" href="#rental_apartment">Requested
+                    Apartments</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" *ngIf="user_info.role == 1" href="#live_listing">Confirmed
+                    Requests</a>
+                </li>
+                <!-- //////////////////////////Owner////////////////////////////////// -->
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" *ngIf="user_info.role == 2" href="#Requested_From_User">Rent
+                    Requests
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" *ngIf="user_info.role == 2" href="#Requested_To_Admin">Sent
+                    Requests
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" *ngIf="user_info.role == 2" href="#Approved_listings">Approved
+                    listings</a>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-content profile-tab-cont">
+              <div class="tab-pane fade show active" id="myprofile">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <h6 class="mb-0">Full Name</h6>
+                          </div>
+                          <div class="col-sm-9 text-secondary">
+                            {{ user_info.name }}
+                          </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <h6 class="mb-0">Email</h6>
+                          </div>
+                          <div class="col-sm-9 text-secondary">
+                            {{ user_info.email }}
+                          </div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <h6 class="mb-0">Gender</h6>
+                          </div>
+                          <div class="col-sm-9 text-secondary">
+                            {{ user_info.gender }}
+                          </div>
+                        </div>
+                        <hr />
+
+                        <hr />
+
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+              <div id="password_tab" class="tab-pane fade">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">Change Password</h5>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-10 col-lg-12">
+                        <div class="alert alert-danger" *ngIf="error">
+                          {{ error }}
+                        </div>
+                        <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm.value)">
+                          <div class="form-group">
+                            <label >Old Password</label>
+                            <input type="password" name="old_password" ngModel class="form-control" />
+                          </div>
+                          <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" name="password" ngModel class="form-control" />
+                          </div>
+                          <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" name="password_confirmation" ngModel class="form-control" />
+                          </div>
+                          <div class="form-group text-center">
+
+                            <button class="btn btn-danger" type="submit">
+                              Save Changes
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="rental_apartment" class="tab-pane fade">
+                <div class="container-fluid">
+                  <div class="row justify-content-center mb-5">
+                    <div class="col-md-7 text-center border-primary">
+                      <h2 class="font-weight-light text-danger">
+                        Requested Apartments
+                      </h2>
+                      <div class="alert alert-danger" *ngIf="errorReq">
+                        {{ errorReq }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-start">
+                    <div class="col-sm-6 mb-4 mb-lg-4 col-md-4 m-5" *ngFor="
+                        let apartment of apartmentsDetailsReq;
+                        let i = index
+                      ">
+                      <div class="card" style="width: 450px">
+                        <img class="card-img-top" [src]="url + apartmentsDetailsReq[i]['link']" alt="Card image"
+                          style="width: 100%" />
+                        <div class="card-body">
+                          <h5 class="card-text">{{ apartment.price }}</h5>
+                          <h5 class="card-text">
+                            Address : {{ apartment.address }}
+                          </h5>
+                          <h5 class="card-text">
+                            Max Persons : {{ apartment.max }}
+                          </h5>
+                          <h5 class="card-text">
+                            Available Places : {{ apartment.available }}
+                          </h5>
+                          <h5 class="card-text mb-5">
+                            Gender : {{ apartment.gender }}
+                          </h5>
+
+                          <a (click)="withdraw(i)" class="btn btn-danger ml-5">Remove</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="live_listing" class="tab-pane fade">
+                <div class="container-fluid">
+                  <div class="row justify-content-center mb-5">
+                    <div class="col-md-7 text-center border-primary">
+                      <h2 class="font-weight-light text-danger">
+                        Confirmed Requests
+                      </h2>
+                      <div class="alert alert-danger" *ngIf="errorConf">
+                        {{ errorConf }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6" *ngFor="
+                        let apartment of apartmentsDetailsConf;
+                        let i = index
+                      ">
+                      <div class="card">
+                        <img class="card-img-top" [src]="url + apartmentsDetailsConf[i]['link']" alt="Card image"
+                          style="width: 100%" />
+                        <div class="card-body">
+                          <h5 class="card-text">
+                            Price: {{ apartment.price }}
+                          </h5>
+                          <h5 class="card-text">
+                            Address : {{ apartment.address }}
+                          </h5>
+                          <h5 class="card-text">
+                            Max Persons : {{ apartment.max }}
+                          </h5>
+                          <h5 class="card-text">
+                            Available Places : {{ apartment.available }}
+                          </h5>
+                          <h5 class="card-text">
+                            Gender : {{ apartment.gender }}
+                          </h5>
+                        </div>
+                        <div class="card-text">
+                          <label for="comment">Comment</label>
+                        </div>
+                        <div class="card-text" *ngIf="!editMode || currentCard != i">
+                          {{ rentApartmentsConf[i].comments }}
+                        </div>
+                        <div class="card-text">
+                          <form #commentForm="ngForm" class="bg-light">
+                            <div class="form-group">
+                              <textarea *ngIf="editMode && currentCard == i" name="comment"
+                                ngModel="{{ rentApartmentsConf[i].comments }}" id="comment"
+                                class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                              <input (click)="
+                                  updateComment(
+                                    commentForm,
+                                    rentApartmentsConf[i]
+                                  )
+                                " *ngIf="editMode && currentCard == i" type="submit" value="Post"
+                                class="btn btn-primary text-white btn-sm" />
+                              <input *ngIf="!editMode || currentCard != i" (click)="changeMode(true, i)" type="button"
+                                value="Edit" class="btn btn-primary text-white btn-sm" />
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ///////////////////////// Owner////////////////////////// -->
+              <div id="Requested_To_Admin" class="tab-pane fade">
+                <div class="container-fluid">
+                  <div class="row justify-content-center mb-5">
+                    <div class="col-md-7 text-center border-primary">
+                      <h2 class="font-weight-light text-danger">
+                        Requests To Admin
+                      </h2>
+                      <div class="alert alert-danger" *ngIf="errorApartmentRequested">
+                        {{ errorApartmentRequested }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 mb-4 mb-lg-4 col-lg-4 m-5" *ngFor="
+                        let apartment of apartmentRequested;
+                        let i = index
+                      ">
+                      <div class="card" style="width: 450px">
+                        <img class="card-img-top" [src]="url + apartmentRequested[i]['link']" alt="Card image"
+                          style="width: 100%" />
+                        <div class="card-body">
+                          <h5 class="card-text mb-5">
+                            Address : {{ apartment.address }}
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="Requested_From_User" class="tab-pane fade">
+                <div class="container-fluid">
+                  <div class="row justify-content-center mb-5">
+                    <div class="col-md-7 text-center border-primary">
+                      <h2 class="font-weight-light text-danger">
+                        Requests From Renters
+                      </h2>
+                      <div class="alert alert-danger" *ngIf="errorOwnerApartmentRequests">
+                        {{ errorOwnerApartmentRequests }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 mb-4 mb-lg-4 col-lg-4 m-5" *ngFor="
+                        let apartment of Owner_apartments_request;
+                        let i = index
+                      ">
+                      <div class="card" style="width: 450px">
+                        <img class="card-img-top" [src]="url + Owner_apartments_request[i]['link']" alt="Card image"
+                          style="width: 100%" />
+                        <div class="card-body">
+                          <h5 class="card-text mb-5">
+                            Renter : {{ peopleNames[i] }}
+                          </h5>
+                          <h5 class="card-text mb-5">
+                            Address : {{ apartment.address }}
+                          </h5>
+                          <a (click)="ConfirmRequest(i)" class="btn btn-danger mx-5">Confirm</a>
+                          <a (click)="RejectRequest(i)" class="btn btn-danger ml-5">Reject</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- appartment of  owner that Pending -->
+              <div id="Approved_listings" class="tab-pane fade">
+                <div class="container-fluid">
+                  <div class="row justify-content-center mb-5">
+                    <div class="col-md-7 text-center border-primary">
+                      <h2 class="font-weight-light text-danger">
+                        Approved Listings
+                      </h2>
+                      <div class="alert alert-danger" *ngIf="errorapartmentApproved">
+                        {{ errorapartmentApproved }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 mb-4 mb-lg-4 col-lg-4 m-5"
+                      *ngFor="let apartment of apartmentApproved; let i = index">
+                      <div class="card" style="width: 450px">
+                        <img class="card-img-top" [src]="url + apartmentApproved[i]['link']" alt="Card image"
+                          style="width: 100%" />
+                        <div class="card-body">
+                          <h5 class="card-text mb-5">
+                            Address : {{ apartment.address }}
+                          </h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+<div class="main-wrapper">
+  <app-aside>
+    <ng-container class="content">
+      <ul>
+        <li>
+          <a routerLink="/admin-panal/statics"
+            ><i class="fas fa-tachometer-alt"></i> <span>Statics</span></a
+          >
+        </li>
+        <li class="list-divider"></li>
+
+        <li class="submenu">
+          <a routerLink="/admin-panal/apartments"
+            ><i class="fas fa-home"></i> <span> Apartments </span>
+            <span class="menu-arrow"></span
+          ></a>
+        </li>
+        <li class="list-divider"></li>
+        <li class="submenu active">
+          <a routerLink="/admin-panal/users"
+            ><i class="fas fa-user"></i> <span> Users </span>
+            <span class="menu-arrow"></span
+          ></a>
+        </li>
+
+        <li class="list-divider"></li>
+        <li class="submenu">
+          <a routerLink="/admin-panal/massages"
+            ><i class="fas fa-comment-alt"></i><span> Messages </span>
+            <span class="menu-arrow"></span
+          ></a>
+        </li>
+        <li class="list-divider"></li>
+        <li class="submenu">
+          <a routerLink="/admin-panal/add/City"
+            ><i class="fas fa-plus-circle"></i> <span> Add City </span>
+            <span class="menu-arrow"></span
+          ></a>
+        </li>
+      </ul>
+    </ng-container>
+  </app-aside>
+  <div class="page-wrapper mt-5 mb-5">
+    <div class="content container-fluid">
+      <div class="page-header">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="mt-5">
+              <h4 class="card-title float-left mt-2">Users</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card card-table">
+            <div class="card-body booking_card">
+              <div class="table-responsive">
+                <div class="alert alert-danger" *ngIf="error">
+                  {{ error }}
+                </div>
+
+                <table
+                  id="datatableexample"
+                  datatable
+                  class="row-border hover table table-stripped table table-hover table-center mb-0"
+                >
+                  <thead>
+                    <tr>
+                      <th>user ID</th>
+                      <th>Profile</th>
+
+                      <th>User Role</th>
+                      <th>User Email</th>
+                      <th>Gender</th>
+                      <th class="text-center">Delete</th>
+                      <th class="text-center">Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let user of users">
+                      <td>{{ user.id }}</td>
+                      <td>
+                        <h2 class="table-avatar">
+                          <a>{{ user.name }} </a>
+                        </h2>
+                      </td>
+                      <td>{{ user.role==0?'Admin':user.role==1?'User':'Owner' }}</td>
+                      <td>{{ user.email }}</td>
+                      <td>{{ user.gender }}</td>
+                      <td class="text-center">
+                        <div class="actions">
+                          <button
+                            href="#"
+                            class="btn btn-rounded bg-dark text-white mr-2"
+                            (click)="onDelete(user.id)"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        <div class="actions">
+                          <a
+                            [routerLink]="['edit', user.id]"
+                            class="btn btn-rounded bg-primary text-white mr-2"
+                            >Edit</a
+                          >
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
