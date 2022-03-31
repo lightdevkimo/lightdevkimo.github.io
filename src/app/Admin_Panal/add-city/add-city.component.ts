@@ -17,7 +17,7 @@ export class AddCityComponent implements OnInit {
   }
 
   AddCity(data:any) {
-    this.http.post('https://saknweb.herokuapp.com/api/cities',data
+    this.http.post('http://sakn.atwebpages.com/api/cities',data
     ,{headers: new HttpHeaders().append('Authorization','Bearer '+localStorage.getItem('token'))})
       .subscribe(
         (data) => {
@@ -35,7 +35,7 @@ export class AddCityComponent implements OnInit {
 
   Cities() {
     this.http
-      .get('https://saknweb.herokuapp.com/api/cities', {
+      .get('http://sakn.atwebpages.com/api/cities', {
         headers: new HttpHeaders().append(
           'Authorization',
           'Bearer ' + localStorage.getItem('token')
@@ -58,7 +58,7 @@ export class AddCityComponent implements OnInit {
 
   deleteCity(id: number) {
     this.http
-      .delete('https://saknweb.herokuapp.com/api/cities/' + id, {
+      .delete('http://sakn.atwebpages.com/api/cities/' + id, {
         headers: new HttpHeaders().append(
           'Authorization',
           'Bearer ' + localStorage.getItem('token')

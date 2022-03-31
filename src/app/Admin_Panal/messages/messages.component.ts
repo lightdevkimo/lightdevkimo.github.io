@@ -18,7 +18,7 @@ export class MessagesComponent implements OnInit {
 
   ContactUs() {
     this.http
-      .get('https://saknweb.herokuapp.com/api/contact-us', {
+      .get('http://sakn.atwebpages.com/api/contact-us', {
         headers: new HttpHeaders().append(
           'Authorization',
           'Bearer ' + localStorage.getItem('token')

@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {}
   signup(data) {
-    this.http.post('https://saknweb.herokuapp.com/api/register', data).subscribe((res) => {
+    this.http.post('http://sakn.atwebpages.com/api/register', data).subscribe((res) => {
         console.log(res);
         localStorage.setItem('token', res['token']);
         localStorage.setItem('role', res['role']);

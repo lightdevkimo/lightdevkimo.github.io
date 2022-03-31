@@ -16,7 +16,7 @@ export class ApartmentsComponent implements OnInit {
 
   Apartements() {
     this.http
-      .get('https://saknweb.herokuapp.com/api/apartements', {
+      .get('http://sakn.atwebpages.com/api/apartements', {
         headers: new HttpHeaders().append(
           'Authorization',
           'Bearer ' + localStorage.getItem('token')
