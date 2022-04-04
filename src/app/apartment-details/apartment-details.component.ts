@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ApartmentDetailsComponent implements OnInit {
 
-  url = "https://saknweb.herokuapp.com/storage/images/"
+  url = "https://saknweb.herokuapp.com/apartments/"
   apart: apart
   role: number;
   id: string

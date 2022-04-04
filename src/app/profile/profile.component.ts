@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
   peopleNames=[]
   personName=""
 
-  url = 'https://saknweb.herokuapp.com/storage/images/';
+  url = 'https://saknweb.herokuapp.com/apartments/';
 
   ngOnInit(): void {
     this.user_info = JSON.parse(localStorage.getItem('user_info'));

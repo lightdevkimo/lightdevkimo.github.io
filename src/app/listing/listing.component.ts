@@ -23,7 +23,7 @@ export class ListingComponent implements OnInit {
   cities: cities[] = [];
   apart: apart[] = [];
   test = true;
-  url="https://saknweb.herokuapp.com/storage/images/"
+  url="https://saknweb.herokuapp.com/apartments/"
   error=""
 
   getcities() {
