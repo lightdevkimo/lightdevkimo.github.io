@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("salt", res['salt']);
       localStorage.setItem("user_info",JSON.stringify(res['data']));
       this.auth.checktoken(true);
-      this.router.navigateByUrl('/find');
+      this.router.navigateByUrl('/profile');
       setTimeout(()=>{
         location.reload();
       },1)
