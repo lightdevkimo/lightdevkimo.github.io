@@ -19,7 +19,7 @@ export class ContactComponent implements OnInit {
   }
 
   Sent(postData: contact) {
-    this.http.post('http://sakn.atwebpages.com/api/contact-us', postData).subscribe(data=>{
+    this.http.post('https://saknweb.herokuapp.com/api/contact-us', postData).subscribe(data=>{
       this.router.navigateByUrl('/home');
     },error=>{
       console.log(error);

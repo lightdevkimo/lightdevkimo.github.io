@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ApartmentDetailsComponent implements OnInit {
 
-  url = "http://sakn.atwebpages.com/apartments/"
+  url = "https://saknweb.herokuapp.com/apartments/"
   apart: apart
   role: number;
   id: string
@@ -47,7 +47,7 @@ export class ApartmentDetailsComponent implements OnInit {
   Reserve(){
       this.http
         .post(
-          'http://sakn.atwebpages.com/api/rent/',
+          'https://saknweb.herokuapp.com/api/rent/',
           {
             'apartment_id':this.id,
             'user_id':JSON.parse(localStorage.getItem('user_info'))['id']
@@ -67,7 +67,7 @@ export class ApartmentDetailsComponent implements OnInit {
   Approve(){
     console.log(localStorage.getItem('token'));
     this.http
-      .post('http://sakn.atwebpages.com/api/apartements/approve/'+this.id,{},
+      .post('https://saknweb.herokuapp.com/api/apartements/approve/'+this.id,{},
         {headers: new HttpHeaders().append('Authorization','Bearer '+localStorage.getItem('token'))})
       .subscribe(
         (data) => {
@@ -81,9 +81,9 @@ export class ApartmentDetailsComponent implements OnInit {
   }
 
   Reject(){
-    console.log('http://sakn.atwebpages.com/api/apartements/reject/'+this.id);
+    console.log('https://saknweb.herokuapp.com/api/apartements/reject/'+this.id);
     this.http
-      .post('http://sakn.atwebpages.com/api/apartements/reject/'+this.id,{},
+      .post('https://saknweb.herokuapp.com/api/apartements/reject/'+this.id,{},
         {headers: new HttpHeaders().append('Authorization','Bearer '+localStorage.getItem('token'))})
       .subscribe(
         (data) => {
@@ -97,7 +97,7 @@ export class ApartmentDetailsComponent implements OnInit {
 
 
   showApart() {
-    this.http.get('http://sakn.atwebpages.com/api/apartements/' + this.id).subscribe(data => {
+    this.http.get('https://saknweb.herokuapp.com/api/apartements/' + this.id).subscribe(data => {
 
       this.apart = data['data'];
 
@@ -106,7 +106,7 @@ export class ApartmentDetailsComponent implements OnInit {
   }
 
   getUserInfo(userId:number):any{
-    this.http.get('http://sakn.atwebpages.com/api/user/'+userId).subscribe(
+    this.http.get('https://saknweb.herokuapp.com/api/user/'+userId).subscribe(
       data=>{
         this.personName =  data['data']['name']
         this.peopleNames.push(this.personName)
@@ -116,7 +116,7 @@ export class ApartmentDetailsComponent implements OnInit {
   }
 
   showComments() {
-    this.http.get('http://sakn.atwebpages.com/api/comment',
+    this.http.get('https://saknweb.herokuapp.com/api/comment',
     {
       params: new HttpParams().append(
           "apartment",this.id

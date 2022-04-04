@@ -23,11 +23,11 @@ export class ListingComponent implements OnInit {
   cities: cities[] = [];
   apart: apart[] = [];
   test = true;
-  url="http://sakn.atwebpages.com/apartments/"
+  url="https://saknweb.herokuapp.com/apartments/"
   error=""
 
   getcities() {
-    this.http.get('http://sakn.atwebpages.com/api/governates').subscribe(data => {
+    this.http.get('https://saknweb.herokuapp.com/api/governates').subscribe(data => {
 
       for (let i = 0; i < data['data'].length; i++) {
         this.gov[i] = (data['data'][i]);
@@ -39,7 +39,7 @@ export class ListingComponent implements OnInit {
 
 
   choosegov(event: any) {
-    this.http.get('http://sakn.atwebpages.com/api/findcities/'.concat(event.target.value)).subscribe(data => {
+    this.http.get('https://saknweb.herokuapp.com/api/findcities/'.concat(event.target.value)).subscribe(data => {
       for (let i = 0; i < data['data'].length; i++) {
         this.cities[i] = (data['data'][i]);
       }
@@ -72,7 +72,7 @@ export class ListingComponent implements OnInit {
     params =kimo? params.append('city_id', kimo):params;
     console.log(params);
 
-    this.http.get('http://sakn.atwebpages.com/api/apartement/search', { params: params })
+    this.http.get('https://saknweb.herokuapp.com/api/apartement/search', { params: params })
       .subscribe((result) => {
         this.error = ""
         this.apart=[];

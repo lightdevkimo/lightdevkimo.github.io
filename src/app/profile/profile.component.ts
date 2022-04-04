@@ -34,7 +34,7 @@ export class ProfileComponent implements OnInit {
   peopleNames=[]
   personName=""
 
-  url = 'http://sakn.atwebpages.com/apartments/';
+  url = 'https://saknweb.herokuapp.com/apartments/';
 
   ngOnInit(): void {
     this.user_info = JSON.parse(localStorage.getItem('user_info'));
@@ -47,7 +47,7 @@ export class ProfileComponent implements OnInit {
 
   ConfirmRequest(index:number) {
     this.http
-      .put('http://sakn.atwebpages.com/api/rent/'+this.OwnerApartmentRequests[index]['id'],{}, {headers: new HttpHeaders().append('Authorization','Bearer '+localStorage.getItem('token'))})
+      .put('https://saknweb.herokuapp.com/api/rent/'+this.OwnerApartmentRequests[index]['id'],{}, {headers: new HttpHeaders().append('Authorization','Bearer '+localStorage.getItem('token'))})
 
       .subscribe(
         (data) => {
@@ -64,7 +64,7 @@ export class ProfileComponent implements OnInit {
   RejectRequest(index:number) {
     this.http
       .delete(
-        'http://sakn.atwebpages.com/api/rent/' + this.OwnerApartmentRequests[index]['id'],{ headers: new HttpHeaders().append('Authorization','Bearer '+localStorage.getItem('token'))}
+        'https://saknweb.herokuapp.com/api/rent/' + this.OwnerApartmentRequests[index]['id'],{ headers: new HttpHeaders().append('Authorization','Bearer '+localStorage.getItem('token'))}
       )
       .subscribe((data) => {
         this.router.navigateByUrl('/home');
@@ -78,7 +78,7 @@ export class ProfileComponent implements OnInit {
 
   getOwnerApartmentRequests() {
     this.http
-      .get<{ data: rentApartment[] }>('http://sakn.atwebpages.com/api/rent', {
+      .get<{ data: rentApartment[] }>('https://saknweb.herokuapp.com/api/rent', {
         params: new HttpParams()
           .append('owner', this.user_info['id'])
           .append('status', 'requested'),
@@ -102,7 +102,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getUserInfo(userId:number):any{
-    this.http.get('http://sakn.atwebpages.com/api/user/'+userId).subscribe(
+    this.http.get('https://saknweb.herokuapp.com/api/user/'+userId).subscribe(
       data=>{
         this.personName =  data['data']['name']
         this.peopleNames.push(this.personName)
@@ -113,7 +113,7 @@ export class ProfileComponent implements OnInit {
 
   getApartmentRequested() {
     this.http
-      .get('http://sakn.atwebpages.com/api/apartement/requested',
+      .get('https://saknweb.herokuapp.com/api/apartement/requested',
       {
         params: new HttpParams()
         .append('owner_id', this.user_info['id']),
@@ -135,7 +135,7 @@ export class ProfileComponent implements OnInit {
 
   getApartmentApproved() {
     this.http
-      .get('http://sakn.atwebpages.com/api/apartement/approved',
+      .get('https://saknweb.herokuapp.com/api/apartement/approved',
       {
         params: new HttpParams()
         .append('owner_id', this.user_info['id']),
@@ -158,7 +158,7 @@ export class ProfileComponent implements OnInit {
   changePassword(data:any) {
     data['email']=this.user_info['email']
     this.http
-      .post('http://sakn.atwebpages.com/api/user/changepassword',data,{ headers: new HttpHeaders().append('Authorization','Bearer '+localStorage.getItem('token'))})
+      .post('https://saknweb.herokuapp.com/api/user/changepassword',data,{ headers: new HttpHeaders().append('Authorization','Bearer '+localStorage.getItem('token'))})
 
       .subscribe(
         (data) => {
@@ -175,7 +175,7 @@ export class ProfileComponent implements OnInit {
 
   getRentApartmentReq() {
     this.http
-      .get<{ data: rentApartment[] }>('http://sakn.atwebpages.com/api/rent', {
+      .get<{ data: rentApartment[] }>('https://saknweb.herokuapp.com/api/rent', {
         params: new HttpParams()
           .append('user', this.user_info['id'])
           .append('status', 'requested'),
@@ -198,7 +198,7 @@ export class ProfileComponent implements OnInit {
   }
   getRentApartmentConf() {
     this.http
-      .get<{ data: rentApartment[] }>('http://sakn.atwebpages.com/api/rent', {
+      .get<{ data: rentApartment[] }>('https://saknweb.herokuapp.com/api/rent', {
         params: new HttpParams()
           .append('user', this.user_info['id'])
           .append('status', 'confirmed'),
@@ -222,7 +222,7 @@ export class ProfileComponent implements OnInit {
 
   showApart(id: number, status: string,type:string) {
     this.http
-      .get('http://sakn.atwebpages.com/api/apartements/' + id)
+      .get('https://saknweb.herokuapp.com/api/apartements/' + id)
       .subscribe((res) => {
         if (status == 'req' && type == 'user') {
           this.apartmentsDetailsReq.push(res['data']);
@@ -238,7 +238,7 @@ export class ProfileComponent implements OnInit {
   withdraw(index: number) {
     this.http
       .delete(
-        'http://sakn.atwebpages.com/api/rent/' + this.rentApartmentsReq[index]['id'],{ headers: new HttpHeaders().append('Authorization','Bearer '+localStorage.getItem('token'))}
+        'https://saknweb.herokuapp.com/api/rent/' + this.rentApartmentsReq[index]['id'],{ headers: new HttpHeaders().append('Authorization','Bearer '+localStorage.getItem('token'))}
       )
       .subscribe((res) => {
         console.log(res);
@@ -255,7 +255,7 @@ export class ProfileComponent implements OnInit {
   updateComment(form: NgForm, rentApart: number) {
     this.http
       .post(
-        'http://sakn.atwebpages.com/api/comment',
+        'https://saknweb.herokuapp.com/api/comment',
         {
           comment: form.value.comment,
         },
